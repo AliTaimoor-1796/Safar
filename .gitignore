@@ -39,3 +39,6 @@ app-example
 
 #.yaml
 pnpm-lock.yaml
+
+#.env
+.env

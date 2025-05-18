@@ -6,12 +6,12 @@ export default function Layout() {
     <Tabs
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+          let iconName: keyof typeof Ionicons.glyphMap;
           if (route.name === 'index') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'feed') {
             iconName = focused ? 'compass' : 'compass-outline';
-          } else if (route.name === 'profile') {
+          } else {
             iconName = focused ? 'person' : 'person-outline';
           }
           return <Ionicons name={iconName} size={size} color={color} />;
