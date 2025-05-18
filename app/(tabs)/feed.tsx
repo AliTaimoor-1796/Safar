@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const initialPosts = [
   {
-    id: 1,
+    id: "1",
     user: 'Amina Khan',
     location: 'Hunza, Gilgit-Baltistan',
     description: 'Enjoying the Breathtaking view of Attabad Lake',
@@ -23,7 +23,7 @@ const initialPosts = [
     image: 'https://lh5.googleusercontent.com/p/AF1QipOXfa4Ym4iWznbcGcifcW--yb85Za2-T3gdBumd=w608-h351-n-k-no',
   },
   {
-    id: 2,
+    id: "2",
     user: 'Faisal Ahmed',
     location: 'Badshahi Mosque, Lahore',
     description: 'Mesmerized by the architectural beauty of Badshahi Mosque',
@@ -32,7 +32,7 @@ const initialPosts = [
     image: 'https://media.istockphoto.com/id/1386446426/photo/badshahi-mosque.jpg?s=612x612&w=0&k=20&c=vShhc9rb17q_5k-tx_HJnlDvlE4YjCNNlOCEWplI2_Y=',
   },
   {
-    id: 3,
+    id: "3",
     user: 'Abrar Ahmed',
     location: 'Faisal Mosque, Islamabad',
     description: 'Faisal Mosque, an iconic and breathtaking structure and one of the largest mosques in the world.',
@@ -44,11 +44,11 @@ const initialPosts = [
 
 export default function FeedScreen() {
   const [posts] = useState(initialPosts);
-  const [likedPosts, setLikedPosts] = useState({});
+  const [likedPosts, setLikedPosts] = useState<Record<string, boolean>>({});
   const [modalVisible, setModalVisible] = useState(false);
 
   // Toggle like function
-  const toggleLike = (postId) => {
+  const toggleLike = (postId: string) => {
     setLikedPosts((prev) => ({
       ...prev,
       [postId]: !prev[postId],

@@ -11,12 +11,22 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+interface items {
+  title?: string,
+  image: string,
+  days?: string
+}
+
+interface Sections {
+  title: string,
+  items: items[]
+}
 const HomeScreen = () => {
  
   const popularDestinations = [
-    { name: 'K2, Gilgit-Baltistan', image: 'https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQ_LJjKVCDey4tIBfSwpGYuNNCdeGSn4ugKaPpJ8FmnqgpWqDbSeh_8dMVRupqyPIWT4bRIDgd8hQ6YXtB17nGHXVkCJyYo0NW_kQk2_Q' },
-    { name: 'Saif-ul-Malook Lake, KPK', image: 'https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTQksdv8Lt_GVr7dzJXE_wZblzKg5X2AT3joT7RJqWv7UKX2MEP45180s9_TrdgskZ39enLrBya6m3a2g_CU9gJprrbO2UiNQdMctpinA' },
-    { name: 'Mohenjo-daro, Sindh', image: 'https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRnByrKtgG3U-y4r4IzLDur5h3VUDMNsaWV5auz-wjGdQZcPJ9wdw-8q9gsFSTu_XWYJvVvCcKl1wWmvw5i2ESws0BJr0spKY3G8LhlLNk' },
+    { title: 'K2, Gilgit-Baltistan', image: 'https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQ_LJjKVCDey4tIBfSwpGYuNNCdeGSn4ugKaPpJ8FmnqgpWqDbSeh_8dMVRupqyPIWT4bRIDgd8hQ6YXtB17nGHXVkCJyYo0NW_kQk2_Q' },
+    { title: 'Saif-ul-Malook Lake, KPK', image: 'https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTQksdv8Lt_GVr7dzJXE_wZblzKg5X2AT3joT7RJqWv7UKX2MEP45180s9_TrdgskZ39enLrBya6m3a2g_CU9gJprrbO2UiNQdMctpinA' },
+    { title: 'Mohenjo-daro, Sindh', image: 'https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRnByrKtgG3U-y4r4IzLDur5h3VUDMNsaWV5auz-wjGdQZcPJ9wdw-8q9gsFSTu_XWYJvVvCcKl1wWmvw5i2ESws0BJr0spKY3G8LhlLNk' },
   ];
 
   const upcomingTrips = [
@@ -32,7 +42,7 @@ const HomeScreen = () => {
   ];
 
   
-  const Section = ({ title, items }) => (
+  const Section = ({ title, items  }: Sections) => (
     <View style={styles.sectionContainer}>
       <Text style={styles.sectionTitle}>{title}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -40,7 +50,7 @@ const HomeScreen = () => {
           <TouchableOpacity key={index} style={styles.card}>
             <Image source={{ uri: item.image }} style={styles.cardImage} />
             <View style={styles.cardTextContainer}>
-              <Text style={styles.cardTitle}>{item.title || item.name}</Text>
+              <Text style={styles.cardTitle}>{item.title}</Text>
               {item.days && <Text style={styles.cardSubtitle}>{item.days}</Text>}
             </View>
           </TouchableOpacity>
