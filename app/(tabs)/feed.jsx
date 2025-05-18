@@ -43,7 +43,7 @@ const initialPosts = [
 ];
 
 export default function FeedScreen() {
-  const [posts, setPosts] = useState(initialPosts);
+  const [posts] = useState(initialPosts);
   const [likedPosts, setLikedPosts] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
 
