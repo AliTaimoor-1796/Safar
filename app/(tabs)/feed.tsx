@@ -11,6 +11,8 @@ import {
   Pressable
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+// ✅ Use the custom hook instead of PostContext
+import { usePosts } from '../context/PostContext';
 
 const initialPosts = [
   {
@@ -43,11 +45,14 @@ const initialPosts = [
 ];
 
 export default function FeedScreen() {
-  const [posts] = useState(initialPosts);
   const [likedPosts, setLikedPosts] = useState<Record<string, boolean>>({});
   const [modalVisible, setModalVisible] = useState(false);
 
-  // Toggle like function
+  // ✅ Use usePosts() to get posts from context
+  const { posts } = usePosts();
+
+  const allPosts = [...posts, ...initialPosts];
+
   const toggleLike = (postId: string) => {
     setLikedPosts((prev) => ({
       ...prev,
@@ -55,21 +60,17 @@ export default function FeedScreen() {
     }));
   };
 
-  // Share button popup
   const handleShare = () => {
     setModalVisible(true);
   };
 
   return (
     <View style={styles.container}>
-      {/* Title */}
       <Text style={styles.feedTitle}>Explore Pakistan’s Wonders</Text>
 
-      {/* Posts Feed */}
       <ScrollView showsVerticalScrollIndicator={false}>
-        {posts.map((post) => (
+        {allPosts.map((post) => (
           <View key={post.id} style={styles.postCard}>
-            {/* User Info */}
             <View style={styles.userInfo}>
               <Ionicons name="person-circle-outline" size={24} color="#1b5e20" />
               <View style={styles.userDetails}>
@@ -78,15 +79,15 @@ export default function FeedScreen() {
               </View>
             </View>
 
-            {/* Post Image */}
-            <Image source={{ uri: post.image }} style={styles.postImage} />
+            {post.image && (
+              <Image source={{ uri: post.image }} style={styles.postImage} />
+            )}
 
-            {/* Description */}
-            <Text style={styles.description}>{post.description}</Text>
+            {post.description && (
+              <Text style={styles.description}>{post.description}</Text>
+            )}
 
-            {/* Actions */}
             <View style={styles.actions}>
-              {/* Like Button */}
               <TouchableOpacity
                 style={styles.actionButton}
                 onPress={() => toggleLike(post.id)}
@@ -96,16 +97,16 @@ export default function FeedScreen() {
                   size={20}
                   color={likedPosts[post.id] ? 'red' : '#1b5e20'}
                 />
-                <Text style={styles.actionText}>{post.likes + (likedPosts[post.id] ? 1 : 0)}</Text>
+                <Text style={styles.actionText}>
+                  {(post.likes ?? 0) + (likedPosts[post.id] ? 1 : 0)}
+                </Text>
               </TouchableOpacity>
 
-              {/* Comment Button */}
               <TouchableOpacity style={styles.actionButton}>
                 <Ionicons name="chatbubble-outline" size={20} color="#1b5e20" />
-                <Text style={styles.actionText}>{post.comments}</Text>
+                <Text style={styles.actionText}>{post.comments ?? 0}</Text>
               </TouchableOpacity>
 
-              {/* Share Button */}
               <TouchableOpacity style={styles.actionButton} onPress={handleShare}>
                 <Ionicons name="share-outline" size={20} color="#1b5e20" />
                 <Text style={styles.actionText}>Share</Text>
@@ -115,7 +116,6 @@ export default function FeedScreen() {
         ))}
       </ScrollView>
 
-      {/* Share Modal */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -149,95 +149,101 @@ export default function FeedScreen() {
   );
 }
 
-// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
+    paddingHorizontal: 16,
+    paddingTop: 20,
   },
   feedTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center',
     color: '#1b5e20',
-    marginVertical: 16,
+    marginBottom: 12,
   },
   postCard: {
-    backgroundColor: '#f0f8f0',
-    margin: 16,
-    padding: 16,
+    backgroundColor: 'white',
     borderRadius: 12,
-    elevation: 2,
+    padding: 12,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   userInfo: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 8,
   },
   userDetails: {
     marginLeft: 8,
   },
   userName: {
-    fontSize: 16,
     fontWeight: 'bold',
-    color: '#1b5e20',
+    fontSize: 14,
   },
   userLocation: {
-    fontSize: 14,
-    color: '#555',
+    color: '#777',
+    fontSize: 12,
   },
   postImage: {
+    width: '100%',
     height: 200,
     borderRadius: 8,
-    marginVertical: 10,
+    marginTop: 8,
+    marginBottom: 8,
   },
   description: {
     fontSize: 14,
-    color: '#444',
+    marginBottom: 10,
   },
   actions: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 12,
+    justifyContent: 'space-around',
+    marginTop: 10,
   },
   actionButton: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   actionText: {
-    marginLeft: 4,
-    fontSize: 14,
+    marginLeft: 6,
     color: '#1b5e20',
   },
   modalBackground: {
     flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.4)',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    width: 250,
-    padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
+    padding: 20,
     borderRadius: 10,
+    width: '80%',
     alignItems: 'center',
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 16,
   },
   modalButton: {
     padding: 10,
+    marginTop: 8,
+    borderRadius: 8,
+    backgroundColor: '#e0e0e0',
     width: '100%',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
   },
   closeButton: {
-    marginTop: 10,
+    marginTop: 16,
     backgroundColor: '#1b5e20',
-    padding: 10,
-    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    borderRadius: 8,
   },
 });
-

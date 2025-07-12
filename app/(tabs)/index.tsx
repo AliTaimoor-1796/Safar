@@ -17,10 +17,11 @@ interface items {
   days?: string
 }
 
-interface Sections {
-  title: string,
-  items: items[]
+interface SectionProps {
+  title: string;
+  items: items[];
 }
+
 const HomeScreen = () => {
  
   const popularDestinations = [
@@ -41,8 +42,7 @@ const HomeScreen = () => {
     { title: 'Makran Coast Jeep Safari, Balochistan', image: 'https://cdn.sanity.io/images/we0tdimr/production/b54fc86c6d3e34b77dd20e3d93ad13ab6d5ee6ac-1920x1240.jpg?rect=0,80,1920,1080&w=1920&h=1080&q=70&auto=format' },
   ];
 
-  
-  const Section = ({ title, items  }: Sections) => (
+  const Section: React.FC<SectionProps> = ({ title, items }) => (
     <View style={styles.sectionContainer}>
       <Text style={styles.sectionTitle}>{title}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
