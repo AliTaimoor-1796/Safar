@@ -15,6 +15,8 @@ import uuid from 'react-native-uuid';
 
 export default function ProfileScreen() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [shareModalVisible, setShareModalVisible] = useState(false);
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [video, setVideo] = useState('');
@@ -27,7 +29,7 @@ export default function ProfileScreen() {
     }
 
     addPost({
-      id: uuid.v4().toString(), // ✅ FIXED
+      id: uuid.v4().toString(),
       user: 'Ali Taimoor',
       location: 'Pakistan',
       description,
@@ -72,10 +74,10 @@ export default function ProfileScreen() {
       </Text>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => setEditModalVisible(true)}>
           <Text style={styles.buttonText}>Edit Profile</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonOutline}>
+        <TouchableOpacity style={styles.buttonOutline} onPress={() => setShareModalVisible(true)}>
           <Text style={styles.buttonTextOutline}>Share Profile</Text>
         </TouchableOpacity>
       </View>
@@ -99,6 +101,7 @@ export default function ProfileScreen() {
         <Text style={styles.noPostsText}>No Posts Yet</Text>
       </View>
 
+      {/* Modal for Add Post */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -108,32 +111,67 @@ export default function ProfileScreen() {
         <View style={styles.modalBackground}>
           <View style={styles.modalContainer}>
             <Text style={styles.sectionTitle}>Create a Post</Text>
-
-            <TextInput
-              placeholder="Description"
-              style={styles.input}
-              value={description}
-              onChangeText={setDescription}
-            />
-            <TextInput
-              placeholder="Image URL (optional)"
-              style={styles.input}
-              value={image}
-              onChangeText={setImage}
-            />
-            <TextInput
-              placeholder="Video URL (optional)"
-              style={styles.input}
-              value={video}
-              onChangeText={setVideo}
-            />
-
+            <TextInput placeholder="Description" style={styles.input} value={description} onChangeText={setDescription} />
+            <TextInput placeholder="Image URL (optional)" style={styles.input} value={image} onChangeText={setImage} />
+            <TextInput placeholder="Video URL (optional)" style={styles.input} value={video} onChangeText={setVideo} />
             <Pressable style={styles.modalButton} onPress={handleAddPost}>
               <Text style={styles.buttonText}>Post</Text>
             </Pressable>
-
             <Pressable onPress={() => setModalVisible(false)}>
               <Text style={{ color: 'red', marginTop: 10 }}>Cancel</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Modal for Edit Profile (Mock) */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={editModalVisible}
+        onRequestClose={() => setEditModalVisible(false)}
+      >
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.sectionTitle}>Edit Profile</Text>
+            <TextInput placeholder="Change Username" style={styles.input} />
+            <TextInput placeholder="Change Password" secureTextEntry style={styles.input} />
+            <TextInput placeholder="Profile Picture URL" style={styles.input} />
+            <TextInput placeholder="Bio" style={styles.input} />
+            <Pressable style={styles.modalButton} onPress={() => setEditModalVisible(false)}>
+              <Text style={styles.buttonText}>Save (UI Only)</Text>
+            </Pressable>
+            <Pressable onPress={() => setEditModalVisible(false)}>
+              <Text style={{ color: 'red', marginTop: 10 }}>Cancel</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Modal for Share Profile */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={shareModalVisible}
+        onRequestClose={() => setShareModalVisible(false)}
+      >
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.sectionTitle}>Share Profile</Text>
+            <TouchableOpacity style={styles.input} onPress={() => Alert.alert('Link Copied')}>
+              <Text>📋 Copy Link</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.input} onPress={() => Alert.alert('Shared to WhatsApp')}>
+              <Text>📲 WhatsApp</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.input} onPress={() => Alert.alert('Shared to Facebook')}>
+              <Text>📘 Facebook</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.input} onPress={() => Alert.alert('Shared to Instagram')}>
+              <Text>📸 Instagram</Text>
+            </TouchableOpacity>
+            <Pressable onPress={() => setShareModalVisible(false)}>
+              <Text style={{ color: 'red', marginTop: 10 }}>Close</Text>
             </Pressable>
           </View>
         </View>
