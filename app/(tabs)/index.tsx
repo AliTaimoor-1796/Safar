@@ -62,7 +62,6 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        {/* Header */}
         <View style={styles.header}>
           <View style={styles.titleContainer}>
             <Ionicons name="paper-plane-outline" size={26} color="white" />
@@ -71,7 +70,6 @@ const HomeScreen = () => {
           <Text style={styles.tagline}>   Discover Pakistan's Hidden Gems  </Text>
         </View>
 
-        {/* Search Bar */}
         <View style={styles.searchContainer}>
           <Ionicons name="search-outline" size={24} color="#666" style={styles.searchIcon} />
           <TextInput
@@ -90,7 +88,6 @@ const HomeScreen = () => {
   );
 };
 
-// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

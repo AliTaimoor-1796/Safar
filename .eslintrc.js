@@ -17,7 +17,6 @@ module.exports = {
   ignorePatterns: ['/dist/*', 'node_modules', 'android', 'ios', '/scripts/**'],
   rules: {
     'no-unused-vars': 'warn',
-    'no-console': 'warn',
     '@typescript-eslint/no-explicit-any': 'warn',
     'react/react-in-jsx-scope': 'off', // React 17+
   },
