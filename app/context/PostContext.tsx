@@ -1,4 +1,10 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  createElement as originalCreateElement,
+} from 'react';
 
 // Post type with optional image, video, likes, comments
 export type Post = {
@@ -23,8 +29,28 @@ const PostContext = createContext<PostContextType>({
   addPost: () => {},
 });
 
+// ✅ Monkey patch React.createElement for logging string elements
+if (__DEV__) {
+  const ReactAny = React as any;
+  if (!ReactAny._patchedForTextWarning) {
+    ReactAny.createElement = function patchedCreateElement(type: any, ...rest: any[]) {
+      if (typeof type === 'string' && /^[a-z]/.test(type)) {
+        // Normal host components like View, Text etc.
+      } else if (typeof type === 'string') {
+        // ⚠️ Invalid! Someone trying to render a string directly
+        console.log(
+          '⚠️ Detected attempt to render plain text without <Text>:',
+          type
+        );
+      }
+      return originalCreateElement(type, ...rest);
+    };
+    ReactAny._patchedForTextWarning = true;
+  }
+}
+
 // ✅ Context provider
-const PostProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const PostProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const addPost = (post: Post) => {
