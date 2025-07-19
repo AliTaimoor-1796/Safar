@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
         alignSelf: 'center',
-        color: '#065f46',
+        color: '#057958',
         marginBottom: 10,
     },
     card: {
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: '#065f46',
+        color: '#057958',
     },
     subtitle: {
         fontSize: 13,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#111827',
         borderBottomWidth: 2,
-        borderBottomColor: '#065f46',
+        borderBottomColor: '#057958',
     },
     input: {
         borderWidth: 1,

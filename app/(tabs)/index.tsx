@@ -1,13 +1,13 @@
 import React from 'react';
-import { 
-  SafeAreaView, 
-  ScrollView, 
-  TextInput, 
-  Text, 
-  View, 
-  TouchableOpacity, 
-  StyleSheet, 
-  Image 
+import {
+  SafeAreaView,
+  ScrollView,
+  TextInput,
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Image
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -23,7 +23,7 @@ interface SectionProps {
 }
 
 const HomeScreen = () => {
- 
+
   const popularDestinations = [
     { title: 'K2, Gilgit-Baltistan', image: 'https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQ_LJjKVCDey4tIBfSwpGYuNNCdeGSn4ugKaPpJ8FmnqgpWqDbSeh_8dMVRupqyPIWT4bRIDgd8hQ6YXtB17nGHXVkCJyYo0NW_kQk2_Q' },
     { title: 'Saif-ul-Malook Lake, KPK', image: 'https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTQksdv8Lt_GVr7dzJXE_wZblzKg5X2AT3joT7RJqWv7UKX2MEP45180s9_TrdgskZ39enLrBya6m3a2g_CU9gJprrbO2UiNQdMctpinA' },
@@ -64,8 +64,12 @@ const HomeScreen = () => {
       <ScrollView>
         <View style={styles.header}>
           <View style={styles.titleContainer}>
-            <Ionicons name="paper-plane-outline" size={26} color="white" />
-            <Text style={styles.appTitle}>SAFAR </Text>
+            <Image
+              // eslint-disable-next-line @typescript-eslint/no-require-imports
+              source={require('@/assets/logo/SAFAR_scaled_up.png')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
           </View>
           <Text style={styles.tagline}>   Discover Pakistan's Hidden Gems  </Text>
         </View>
@@ -91,10 +95,10 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffff',
   },
   header: {
-    backgroundColor: '#1b5e20',
+    backgroundColor: '#057958',
     paddingVertical: 30,
     paddingHorizontal: 16,
     borderBottomLeftRadius: 20,
@@ -102,18 +106,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
   },
   appTitle: {
-    fontSize: 32,
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
     marginLeft: 10,
   },
   tagline: {
     fontSize: 18,
-    color: '#e0e0e0',
+    color: 'white',
     fontWeight: 'bold',
     marginTop: 6,
   },
@@ -140,7 +144,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1b5e20',
+    color: '#057958',
     marginBottom: 12,
   },
   card: {
@@ -171,6 +175,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#424242',
     marginTop: 4,
+  },
+  logo: {
+    marginTop: -10,
+    width: 70,
+    height: 70,
   },
 });
 
