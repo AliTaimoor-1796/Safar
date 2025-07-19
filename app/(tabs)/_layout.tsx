@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { PostProvider } from '../context/PostContext';
+import { PostProvider } from '../../context/PostContext';
 import { useGlobalStore } from '@/store/globalStore';
 import { View } from 'react-native';
 
@@ -31,7 +31,7 @@ export default function Layout() {
 
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: '#1b5e20',
+            tabBarActiveTintColor: '#057958',
             tabBarInactiveTintColor: 'gray',
             tabBarStyle: {
               backgroundColor: 'white',

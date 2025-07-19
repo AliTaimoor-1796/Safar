@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 // ✅ Use the custom hook instead of PostContext
-import { usePosts } from '../context/PostContext';
+import { usePosts } from '../../context/PostContext';
 
 const initialPosts = [
   {
@@ -72,7 +72,7 @@ export default function FeedScreen() {
         {allPosts.map((post) => (
           <View key={post.id} style={styles.postCard}>
             <View style={styles.userInfo}>
-              <Ionicons name="person-circle-outline" size={24} color="#1b5e20" />
+              <Ionicons name="person-circle-outline" size={24} color="#057958" />
               <View style={styles.userDetails}>
                 <Text style={styles.userName}>{post.user}</Text>
                 <Text style={styles.userLocation}>{post.location}</Text>
@@ -95,7 +95,7 @@ export default function FeedScreen() {
                 <Ionicons
                   name={likedPosts[post.id] ? 'heart' : 'heart-outline'}
                   size={20}
-                  color={likedPosts[post.id] ? 'red' : '#1b5e20'}
+                  color={likedPosts[post.id] ? 'red' : '#057958'}
                 />
                 <Text style={styles.actionText}>
                   {(post.likes ?? 0) + (likedPosts[post.id] ? 1 : 0)}
@@ -103,12 +103,12 @@ export default function FeedScreen() {
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.actionButton}>
-                <Ionicons name="chatbubble-outline" size={20} color="#1b5e20" />
+                <Ionicons name="chatbubble-outline" size={20} color="#057958" />
                 <Text style={styles.actionText}>{post.comments ?? 0}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.actionButton} onPress={handleShare}>
-                <Ionicons name="share-outline" size={20} color="#1b5e20" />
+                <Ionicons name="share-outline" size={20} color="#057958" />
                 <Text style={styles.actionText}>Share</Text>
               </TouchableOpacity>
             </View>
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   feedTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1b5e20',
+    color: '#057958',
     marginBottom: 12,
   },
   postCard: {
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   },
   actionText: {
     marginLeft: 6,
-    color: '#1b5e20',
+    color: '#057958',
   },
   modalBackground: {
     flex: 1,
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     marginTop: 16,
-    backgroundColor: '#1b5e20',
+    backgroundColor: '#057958',
     paddingVertical: 10,
     paddingHorizontal: 24,
     borderRadius: 8,

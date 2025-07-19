@@ -19,7 +19,7 @@ const LogoScreen: React.FC<LogoScreenProps> = ({ onAnimationEnd }) => {
     <View style={styles.container}>
       <Image
         // eslint-disable-next-line @typescript-eslint/no-require-imports
-        source={require('@/assets/logo/safar_logo.png')}
+        source={require('@/assets/logo/SAFAR.png')}
         style={styles.logo}
         resizeMode="contain"
       />

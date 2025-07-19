@@ -8,9 +8,10 @@ import {
   TextInput,
   Pressable,
   Alert,
+  Image
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { usePosts } from '../context/PostContext';
+import { usePosts } from '../../context/PostContext';
 import uuid from 'react-native-uuid';
 
 export default function ProfileScreen() {
@@ -50,7 +51,12 @@ export default function ProfileScreen() {
       {/* Top Section */}
       <View style={styles.topSection}>
         <View style={styles.profileImageContainer}>
-          <Ionicons name="person-circle-outline" size={90} color="#1b5e20" />
+          <Image
+            // eslint-disable-next-line @typescript-eslint/no-require-imports
+            source={require('@/assets/images/profile_picture.jpeg')}
+            style={{width: 80, height:80, borderRadius: 40}}
+            resizeMode="contain"
+          />
         </View>
         <View style={styles.statsContainer}>
           <View style={styles.stat}>
@@ -83,7 +89,7 @@ export default function ProfileScreen() {
       </View>
 
       <TouchableOpacity
-        style={[styles.button, { marginTop: 20, backgroundColor: '#4caf50' }]}
+        style={[styles.button, { marginTop: 20, backgroundColor: '#4caf50', maxHeight: '5%' }]}
         onPress={() => setModalVisible(true)}
       >
         <Text style={styles.buttonText}>Add Post</Text>
@@ -208,7 +214,7 @@ const styles = StyleSheet.create({
   statNumber: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1b5e20',
+    color: '#057958',
   },
   statLabel: {
     fontSize: 14,
@@ -231,7 +237,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    backgroundColor: '#1b5e20',
+    backgroundColor: '#057958',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
@@ -240,7 +246,7 @@ const styles = StyleSheet.create({
   buttonOutline: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#1b5e20',
+    borderColor: '#057958',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
@@ -251,7 +257,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonTextOutline: {
-    color: '#1b5e20',
+    color: '#057958',
     fontWeight: 'bold',
   },
   highlightsContainer: {
@@ -304,7 +310,7 @@ const styles = StyleSheet.create({
     marginVertical: 6,
   },
   modalButton: {
-    backgroundColor: '#1b5e20',
+    backgroundColor: '#057958',
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
