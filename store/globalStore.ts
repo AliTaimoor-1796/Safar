@@ -1,4 +1,3 @@
-// store/globalStore.ts
 import { create } from 'zustand';
 
 type TripStatus = 'planned' | 'ongoing' | 'paused' | 'completed' | 'cancelled';
@@ -90,12 +89,12 @@ type StoreState = GlobalState & MapState & TripState & ChatState & MediaState;
 
 
 export const useGlobalStore = create<StoreState>((set) => ({
-  // GlobalState
+  
   theme: 'light',
   language: 'en',
-  isLoading: false,
+  isLoading: true,
   loggedIn: false,
-  email: "safar@dsu.edu.pk",
+  email: "safar@gmail.com",
   password: "safar123",
   setEmail: (email) => set({ email }),
   setPassword: (password) => set({ password }),
@@ -104,7 +103,7 @@ export const useGlobalStore = create<StoreState>((set) => ({
   setLanguage: (language) => set({ language }),
   setLoading: (isLoading) => set({ isLoading }),
 
-  // MapState
+  
   locations: {
     route: [],
   },
