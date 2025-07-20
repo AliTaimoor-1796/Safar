@@ -253,17 +253,6 @@ export default function JourneyList() {
             createdAt: new Date().toISOString(),
             emergencyAlerts: "",
           });
-          console.log({
-            id: Date.now().toString(),
-            title: tripTitle || `Trip ${Date.now()}`,
-            duration: tripDuration || estimatedDuration,
-            locations: selectedDestinations,
-            routeCoords,
-            trackingEnabled: true,
-            status: 'planned', // Default status
-            createdAt: new Date().toISOString(),
-            emergencyAlerts: "",
-          })
           setLastTripHash(hash);
         } catch (error) {
           console.error('Failed to load trip:', error);
@@ -374,7 +363,7 @@ export default function JourneyList() {
                         </View>
                       </View>
                       <Text style={styles.duration}>{item.duration} days</Text>
-                      <Text style={styles.metaText}>{formatDateWithSuffix(item.createdAt)} - {formatDateWithSuffix(item.completedAt)}</Text>
+                      <Text style={styles.metaText}>{formatDateWithSuffix(item.createdAt)} - {item.completedAt ? formatDateWithSuffix(item.completedAt) : "not completed yet"}</Text>
                     </View>
 
                     <TouchableOpacity
@@ -608,7 +597,7 @@ export default function JourneyList() {
 
             <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
               {chatHistory.length === 0 ? (
-                <Text style={{ color: '#777', textAlign: 'center' }}>Start chatting with Gemini...</Text>
+                <Text style={{ color: '#777', textAlign: 'center' }}>Start chatting with your AI Assistant...</Text>
               ) : (
                 chatHistory.map((response, index) => (
                   <View key={index} style={{ marginBottom: 12 }}>
